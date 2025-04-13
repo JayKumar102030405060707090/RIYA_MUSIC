@@ -66,34 +66,22 @@ YUMI_PICS = [
 @LanguageStart
 async def start_pm(client, message: Message, _):
     await add_served_user(message.from_user.id)
-    
-    # Typing effect part
-    typing_message = await message.reply("<b>ᴅɪηɢ..ᴅσηɢ..🥀</b>")  # Initial message
-
-    typing_text = "<b>𝖲ᴛᴧʀᴛɪηɢ...❤️‍🔥</b>**"
-
-    for i in range(1, len(typing_text) + 1):
-        try:
-            await typing_message.edit_text(typing_text[:i])
-            await asyncio.sleep(0.001)
-        except Exception as e:
-            print(f"Error while editing message: {e}")
-
-    await asyncio.sleep(1)
-    await typing_message.delete()
-
-    # Continue with your existing logic here
-    out = private_panel(_)
-    await message.reply_photo(
-        random.choice(NEXI_VID),
-        caption=_["start_2"].format(message.from_user.mention, app.mention),
-        reply_markup=InlineKeyboardMarkup(out),
-    )
-    if await is_on_off(2):
-        return await app.send_message(
-            chat_id=config.LOGGER_ID,
-            text=f"{message.from_user.mention} just started the bot.\n\n<b>User ID :</b> <code>{message.from_user.id}</code>\n<b>Username :</b> @{message.from_user.username}",
-        )
+    if len(message.text.split()) > 1:
+        name = message.text.split(None, 1)[1]
+        if name[0:4] == "help":
+            keyboard = help_pannel(_)
+            return await message.reply_photo(
+                random.choice(YUMI_PICS),
+                caption=_["help_1"].format(config.SUPPORT_CHAT),
+                reply_markup=keyboard,
+            )
+        if name[0:3] == "sud":
+            await sudoers_list(client=client, message=message, _=_)
+            if await is_on_off(2):
+                return await app.send_message(
+                    chat_id=config.LOGGER_ID,
+                    text=f"✦ {message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ ᴛᴏ ᴄʜᴇᴄᴋ <b>sᴜᴅᴏʟɪsᴛ</b>.\n\n<b>✦ ᴜsᴇʀ ɪᴅ ➠</b> <code>{message.from_user.id}</code>\n<b>✦ ᴜsᴇʀɴᴀᴍᴇ ➠</b> @{message.from_user.username}",
+                )
             return
         if name[0:3] == "inf":
             m = await message.reply_text("🔎")
@@ -203,3 +191,4 @@ async def welcome(client, message: Message):
                 await message.stop_propagation()
         except Exception as ex:
             print(ex)
+            
