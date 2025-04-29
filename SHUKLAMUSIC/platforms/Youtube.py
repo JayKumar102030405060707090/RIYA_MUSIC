@@ -1,4 +1,5 @@
-import httpx from typing import Union
+import httpx
+from typing import Union
 
 class YouTubeAPI: def init(self): self.api_url = "http://46.250.243.87:1470/youtube" self.api_key = "1a873582a7c83342f961cc0a177b2b26"
 
