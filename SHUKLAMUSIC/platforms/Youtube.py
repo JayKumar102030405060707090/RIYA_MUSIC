@@ -1,9 +1,11 @@
 import httpx
 from typing import Union
 
-class YouTubeAPI: def init(self): self.api_url = "http://46.250.243.87:1470/youtube" self.api_key = "1a873582a7c83342f961cc0a177b2b26"
-
-async def search_video(self, query: str):
+class YouTubeAPI:
+    def __init__(self):
+        self.api_url = "http://46.250.243.87:1470/youtube"
+        self.api_key = "1a873582a7c83342f961cc0a177b2b26"
+        async def search_video(self, query: str):
     params = {
         "query": query,
         "video": False,
