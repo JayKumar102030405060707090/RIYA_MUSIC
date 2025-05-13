@@ -1,3 +1,4 @@
+from pyrogram.types import Message
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from base64 import b64decode
 from inspect import getfullargspec
